@@ -1,0 +1,340 @@
+/* ---------------------------
+   CONFIGURACIÓN BASE
+---------------------------- */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: 'Quicksand', Arial, sans-serif;
+}
+
+/* ---------------------------
+   FONDO
+---------------------------- */
+.fondo-hoja, .fondo-tierra {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: left center;
+  pointer-events: none;
+}
+
+.fondo-hoja {
+  background-image: url("imagenes/hoja.png");
+  z-index: 0;
+}
+
+.tierra {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 300%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ---------------------------
+   CARRUSEL
+---------------------------- */
+.carrusel {
+  display: flex;
+  scroll-snap-type: x mandatory;
+  overflow-x: auto;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  z-index: 2;
+}
+
+.carrusel > div {
+  flex: 0 0 100%;
+  height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+  padding: 5vh 5vw;
+  box-sizing: border-box;
+}
+
+/* ---------------------------
+   SLIDE 1
+---------------------------- */
+.slide1 {
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  padding: 0 2vw;
+}
+
+.texto-intro {
+  margin-top: 75vh; /* ----solia ser 40vh---- */
+  font-size: clamp(22px, 3vh, 80px); /* ----solia ser clamp(22px, 3vh, 80px)---- */
+}
+
+.texto-intro2 {
+  margin-top: 15vh;
+  font-size: clamp(22px, 3vh, 80px);
+}
+
+/* imagen de la marca */
+.slide1 .marca {
+  position: absolute;
+  top: 5vh; 
+  left: 50%;
+  transform: translateX(-50%);
+  height: 50vh; 
+  width: auto;  
+  z-index: 5;
+  pointer-events: none;
+}
+
+
+/* ---------------------------
+   SLIDE 2
+---------------------------- */
+.slide2 {
+  position: relative; 
+  justify-content: flex-start; 
+  align-items: center;
+}
+.texto-slide2 {
+  position: absolute;
+  top: 80vh; 
+  left: 50%; 
+  transform: translateX(-50%);
+  font-size: clamp(22px, 7vw, 80px); 
+  text-align: center;
+  width: 90%;
+  max-width: 800px;
+}
+
+.brote {
+  position: absolute;
+  top: 50vh; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  height: clamp(300px, 30vh, 900px); 
+  z-index: 1.5;
+  pointer-events: none;
+}
+
+/* Circulos */
+.circulo {
+  position: absolute;
+  width: clamp(500px, 60vw, 1800px);
+  height: auto;
+  cursor: grab;
+  transition: transform 0.2s;
+}
+
+.explicacion-color {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--color-fondo, #222);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  z-index: 100; 
+  box-shadow: inset 0 0 250px 150px rgba(0, 0, 0, 0.9); 
+  transition: opacity 0.6s ease;
+}
+.tierra-explicacion {
+  position: absolute;
+  bottom: -20vh;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20vh);
+  width: 300%;     
+  height: 100%;   
+  z-index: 0;
+  pointer-events: none;
+}
+
+
+
+/* brote/plantita en la pantalla de explicacion de cada rol */
+.plantita-explicacion {
+  position: absolute;
+  bottom: 20vh; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  height: clamp(300px, 30vh, 900px);
+  z-index: 1;
+}
+
+
+#tituloColor,
+#textoColor,
+#volver {
+  position: relative;
+  z-index: 2;
+}
+
+
+.explicacion-color h2 {
+ font-size: clamp(22px, 12vw, 100px); 
+  max-width: 1200px;
+  top: -15vh;
+}
+
+.texto-color{
+   font-size: clamp(22px, 7vw, 80px); 
+  max-width: 1800px;
+  top: -17vh;
+}
+
+.explicacion-color button {
+  margin-top: 20px;
+  font-size: 1rem;
+  border: none;
+  background-color: rgba(255,255,255,0.2);
+  color: white;
+  border-radius: 50px;
+padding: 12px 30px; /* para que mantenga proporción */
+
+  cursor: pointer;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.explicacion-color button:hover {
+  background-color: rgba(255,255,255,0.4);
+}
+
+.explicacion-color button {
+  margin-top: 100px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+/* ---------------------------
+   SLIDE 3
+---------------------------- */
+.slide3 {
+  position: relative; 
+  justify-content: flex-start;
+  align-items: flex-start;
+  
+  
+}
+
+.slide3-titulo {
+  position: absolute;
+  top: 0vh; 
+  left: 50%; 
+  transform: translateX(-50%);
+  font-size: clamp(22px, 9vh, 250px);
+}
+
+.slide3-subtitulo {
+  position: absolute;
+  top: 17vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%; 
+  max-width: 1200px; 
+  font-size: clamp(22px, 2.5vh, 250px);
+  text-align: center; 
+}
+
+
+.slide3-texto {
+  position: absolute;
+  top: 35vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  font-size: clamp(22px, 3vh, 250px);
+  max-width: 1200px;
+  
+}
+
+.slide3-texto2 {
+  position: absolute;
+  top: 77vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1200px;
+  font-size: clamp(22px, 2.5vh, 100px);
+}
+
+.slide1,
+.slide2,
+.slide3 {
+  
+  z-index: 5; 
+}
+
+/* ---------------------------
+   PUNTITOS DE LOS SLIDES
+---------------------------- */
+.indicadores {
+  position: absolute;
+  bottom: 5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2vw;
+  z-index: 5;
+}
+
+.dot {
+  width: 4vw;
+  height: 4vw;
+  max-width: 25px;
+  max-height: 25px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transition: background 0.3s;
+}
+
+.dot.active {
+  background: white;
+}
+
+/* ---------------------------
+   TEXTO RESALTADp
+---------------------------- */
+.resaltado {
+  color: #87CEEB
+;
+  font-weight: bold;
+}
+
+.negrita {
+  font-weight: bold;
+}
+
+
+#volver {
+  position: absolute;
+  bottom: 10vh;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #C81155;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: clamp(22px, 2.5vh, 100px);
+}
+
