@@ -110,7 +110,7 @@ body, html {
 }
 .texto-slide2 {
   position: absolute;
-  top: 80vh; 
+  top: 75vh; 
   left: 50%; 
   transform: translateX(-50%);
   font-size: clamp(22px, 7vw, 80px); 
@@ -133,7 +133,7 @@ body, html {
 /* Circulos */
 .circulo {
   position: absolute;
-  width: clamp(500px, 60vw, 1800px);
+  width: clamp(100px, 25vw, 900px);
   height: auto;
   cursor: grab;
   transition: transform 0.2s;
@@ -206,7 +206,7 @@ body, html {
   font-size: 1rem;
   border: none;
   background-color: rgba(255,255,255,0.2);
-  color: white;
+  color: white;                                                                                  
   border-radius: 50px;
 padding: 12px 30px; /* para que mantenga proporción */
 
@@ -338,3 +338,24 @@ padding: 12px 30px; /* para que mantenga proporción */
   font-size: clamp(22px, 2.5vh, 100px);
 }
 
+.boton-instagram {
+  display: inline-block;
+  margin-top: 28rem;
+  padding: 1rem 2.5rem;
+  background-color: #C81155; /* rosa fuerte */
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: clamp(22px, 4vh, 100px);
+  border: none;
+  border-radius: 2rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+}
+
+.boton-instagram:hover {
+  background-color: #ff85c1;
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(255, 105, 180, 0.4);
+}
