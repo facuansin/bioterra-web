@@ -359,3 +359,280 @@ padding: 12px 30px; /* para que mantenga proporción */
   transform: scale(1.05);
   box-shadow: 0 6px 14px rgba(255, 105, 180, 0.4);
 }
+
+
+#versionCelu, #versionPC {
+    display: none;
+    height: 100vh;
+    width: 100vw;
+  }
+#versionPC {
+  display: none; /* se muestra solo si width > height */
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fondo base */
+#fondoPC {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Tierra por encima del fondo */
+#tierraPC {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 4;
+}
+#troncoIzq, #troncoDer {
+  position: absolute;
+  bottom: 0;
+  height: 150vh;       /* altura completa de la pantalla */
+  width: auto;         /* ancho proporcional a la altura */
+  max-width: 30vw;     /* antes era 20vw, ahora más ancho */
+  object-fit: contain;
+  z-index: 3;
+}
+
+#troncoIzq {
+  left: 0;
+  transform: scaleX(-1); /* espejo */
+}
+
+#troncoDer {
+  right: 0;
+}
+
+/* Marca en la esquina superior izquierda */
+#marcaPC {
+  position: absolute;
+  top: 18vh;
+  left: 12.5vh;
+  transform: translateX(-50%);
+  height: 30vh;
+  width: auto;
+  z-index: 5;
+  pointer-events: none;
+}
+#plantitaPC {
+  position: absolute;
+  top: 67.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 45vh; /* podés ajustar el tamaño según se vea */
+  width: auto;
+  object-fit: contain;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.circuloPC {
+  transition: transform 0.2s;
+  cursor: grab;
+}
+.circuloPC:hover {
+  transform: scale(1.1);
+}
+.seccionOculta {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  transition: background-color 0.6s ease;
+}
+
+#seccionRojo { background-color: #DF253E; }
+#seccionNaranja { background-color: #FBBF5E; }
+#seccionBlanco { background-color: #FFFFFF; }
+#seccionVerde { background-color: #95C11F; }
+#seccionCeleste { background-color: #009ABA; }
+#seccionVioleta { background-color: #6F42EA; }
+
+#textoRaiz {
+  position: absolute;
+  top: 50%; /* ajustá según convenga */
+  left: 14vh;
+  transform: translateX(-50%);
+   font-size: clamp(22px, 3vh, 100px);
+  font-family: 'Quicksand', sans-serif;
+  color: white;
+  text-align: center;
+  z-index: 5;
+  pointer-events: none;
+}
+#textoPlantita {
+  position: absolute;
+  top: 80%; /* ajustá según convenga */
+  left: 50%;
+  transform: translateX(-50%);
+   font-size: clamp(22px, 4vh, 100px);
+  font-family: 'Quicksand', sans-serif;
+  color: white;
+  text-align: center;
+  z-index: 5;
+  pointer-events: none;
+}
+#titulo-Bioterra {
+  position: absolute;
+  top: 10%; /* ajustá según convenga */
+  right: 5%;
+  
+   font-size: clamp(22px, 6vh, 100px);
+  font-family: 'Quicksand', sans-serif;
+  color: white;
+  text-align: center;
+  z-index: 5;
+  pointer-events: none;
+}
+#texto1 {
+  position: absolute;
+  top: 25%; /* ajustá según convenga */
+  right: 5%;
+  
+   font-size: clamp(22px, 2vh, 70px);
+  font-family: 'Quicksand', sans-serif;
+  color: white;
+  text-align: center;
+  z-index: 5;
+  pointer-events: none;
+}
+#boton-instagram {
+  position: absolute; /* 🔹 necesario para que top/left funcionen */
+  top: 55%; /* ajustá según convenga */
+  right: -5%;
+  transform: translateX(-50%);
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  background-color: #C81155; /* rosa fuerte */
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: clamp(22px, 3vh, 100px);
+  border: none;
+  border-radius: 3rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+  z-index: 5;
+}
+
+#boton-instagram:hover {
+  background-color: #ff85c1;
+  transform: translateX(-50%) scale(1.05); /* mantiene la posición al escalar */
+  box-shadow: 0 6px 14px rgba(255, 105, 180, 0.4);
+}
+
+.seccionColor {
+  position: absolute;
+  inset: 0;
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.fondoPC {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.tierraPC {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 4;
+}
+
+.troncoIzq {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+  z-index: 3;
+}
+
+.troncoDer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  object-fit: cover;
+  z-index: 3;
+}
+
+.plantitaPC {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 15%;
+  z-index: 4;
+}
+.boton-volver2 {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  background-color: #C81155;
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: clamp(20px, 2.8vh, 90px);
+  border: none;
+  border-radius: 3rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+  z-index: 20;
+}
+
+.boton-volver2:hover {
+  background-color: #ff85c1;
+  transform: translateX(-50%) scale(1.05);
+  box-shadow: 0 6px 14px rgba(255, 105, 180, 0.4);
+}
+.titulo-secciones {
+  position: absolute;
+  top: 15%; /* ajustá según convenga */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(22px, 4vh, 170px);
+  font-family: 'Quicksand', sans-serif;
+  color: white;
+  text-align: center;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.texto-secciones {
+  position: absolute;
+  top: 25%; /* ajustá según convenga */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(22px, 2vh, 70px);
+  font-family: 'Quicksand', sans-serif;
+  color: white;
+  text-align: center;
+  z-index: 5;
+  pointer-events: none;
+}
