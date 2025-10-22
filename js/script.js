@@ -29,16 +29,6 @@ const textoColor = document.getElementById('textoColor');
 const volver = document.getElementById('volver');
 const slide2 = document.querySelector('.slide2');
 
-// Datos de cada color
-//const infoColor = {
-//  violeta: { titulo: "Tejedor", texto: "Tu desafío es entrelazar la malla biotecnológica con semillas y estructuras, generando armonía sin alterar la esencia de lo vivo.", bg: "#6F42EA"},
-//  rojo: { titulo: "Sanador ", texto: "Tu misión es prevenir y curar, protegiendo a las plantas de enfermedades.", bg: "#DF253E"},
-//  celeste: { titulo: "Regador", texto: "Tenés la responsabilidad de dar agua justa, reparar los sistemas de riego y vigilar el pH que mantiene la huerta con vida. ", bg: "#009ABA" },
-//  blanco: { titulo: "Conectores", texto: "Guardianes de la malla y del vínculo entre la comunidad y lo espiritual.", bg: "#FFFFFF", color: "#000" },
-//  verde: { titulo: "Sembrador ", texto: "Sos quien resguarda las semillas y acompaña el brote de la vida. ", bg: "#95C11F" },
-//  naranja: { titulo: "Recolector", texto: "Tu tarea es cosechar, guardar y compartir el alimento con los demás.", bg: "#FBBF5E" },
-//};
-// Datos de cada color (versión más universal / tipo horóscopo)
 const infoColor = {
   violeta: {
     titulo: "Tejedor",
@@ -178,4 +168,152 @@ volver.addEventListener('click', () => {
     behavior: "smooth"       //no se pq se le canta ir al tercer slide cuando volves para atras
   });
 
+});
+
+
+function verificarOrientacion() {
+    const versionCelu = document.getElementById('versionCelu');
+    const versionPC = document.getElementById('versionPC');
+    
+    if (window.innerHeight > window.innerWidth) {
+      versionCelu.style.display = 'block';
+      versionPC.style.display = 'none';
+    } else {
+      versionCelu.style.display = 'none';
+      versionPC.style.display = 'block';
+    }
+  }
+
+  verificarOrientacion(); // Ejecuta al cargar
+  window.addEventListener('resize', verificarOrientacion);
+  window.addEventListener('orientationchange', verificarOrientacion);
+
+
+// --- SEMICÍRCULO INTERACTIVO PC --- //
+function crearSemicirculoPC() {
+  const semicirculoPC = document.getElementById("semicirculoPC");
+  const plantitaPC = document.getElementById("plantitaPC");
+  semicirculoPC.innerHTML = ""; // limpiar si se vuelve a generar
+
+  const colores = [
+    { src: "css/imagenes/rojo.png", seccion: "seccionRojo" },
+    { src: "css/imagenes/naranja.png", seccion: "seccionNaranja" },
+    { src: "css/imagenes/blanco.png", seccion: "seccionBlanco" },
+    { src: "css/imagenes/verde.png", seccion: "seccionVerde" },
+    { src: "css/imagenes/celeste.png", seccion: "seccionCeleste" },
+    { src: "css/imagenes/violeta.png", seccion: "seccionVioleta" }
+  ];
+
+  const numCirculos = colores.length;
+  const radio = window.innerHeight * 0.25;
+  const centroX = window.innerWidth / 2;
+  const centroY = window.innerHeight / 1.8; // posición sobre la planta
+
+  colores.forEach((color, i) => {
+    const circulo = document.createElement("img");
+    circulo.src = color.src;
+    circulo.classList.add("circuloPC");
+    semicirculoPC.appendChild(circulo);
+
+    const angulo = Math.PI * (i / (numCirculos - 1)); // de izquierda a derecha
+    const x = centroX + radio * Math.cos(angulo);
+    const y = centroY - radio * Math.sin(angulo);
+
+    // Guardar posición original en dataset
+    circulo.dataset.origenX = x - 40;
+    circulo.dataset.origenY = y - 40;
+
+    circulo.style.position = "absolute";
+    circulo.style.left = `${circulo.dataset.origenX}px`;
+    circulo.style.top = `${circulo.dataset.origenY}px`;
+    circulo.style.width = `${window.innerHeight * 0.12}px`;
+    circulo.style.height = `${window.innerHeight * 0.12}px`;
+    circulo.style.zIndex = 6;
+    circulo.style.cursor = "grab";
+
+    // --- Drag & Drop ---
+    let offsetX, offsetY;
+    circulo.addEventListener("mousedown", e => {
+      e.preventDefault();
+      const rect = circulo.getBoundingClientRect();
+      offsetX = e.clientX - rect.left;
+      offsetY = e.clientY - rect.top;
+
+      function mover(e) {
+        circulo.style.left = `${e.clientX - offsetX}px`;
+        circulo.style.top = `${e.clientY - offsetY}px`;
+      }
+
+      function soltar() {
+        document.removeEventListener("mousemove", mover);
+        document.removeEventListener("mouseup", soltar);
+
+        const plantaRect = plantitaPC.getBoundingClientRect();
+        const circRect = circulo.getBoundingClientRect();
+
+        const overlap = !(
+          circRect.right < plantaRect.left ||
+          circRect.left > plantaRect.right ||
+          circRect.bottom < plantaRect.top ||
+          circRect.top > plantaRect.bottom
+        );
+
+        if (overlap) {
+          document.getElementById(color.seccion).style.display = "block";
+          document.getElementById("fondoPC").style.display = "none";
+        } else {
+          // volver a la posición original
+          circulo.style.left = `${circulo.dataset.origenX}px`;
+          circulo.style.top = `${circulo.dataset.origenY}px`;
+        }
+      }
+
+      document.addEventListener("mousemove", mover);
+      document.addEventListener("mouseup", soltar);
+    });
+  });
+}
+
+// Botones de volver para restaurar el menú principal
+document.querySelectorAll(".boton-volver2").forEach(boton => {
+  boton.addEventListener("click", e => {
+    e.preventDefault();
+
+    // Ocultar todas las secciones
+    document.querySelectorAll(".seccionOculta").forEach(sec => {
+      sec.style.display = "none";
+    });
+
+    // Mostrar el menú principal
+    document.getElementById("versionPC").style.display = "block";
+    document.getElementById("fondoPC").style.display = "block";
+
+    // Restaurar posición original de los círculos
+    document.querySelectorAll(".circuloPC").forEach(c => {
+      c.style.left = `${c.dataset.origenX}px`;
+      c.style.top = `${c.dataset.origenY}px`;
+    });
+  });
+});
+
+// Crear al cargar y al cambiar tamaño
+if (window.innerWidth > window.innerHeight) {
+  crearSemicirculoPC();
+  window.addEventListener("resize", crearSemicirculoPC);
+}
+
+// --- BOTONES DE VOLVER --- //
+document.querySelectorAll(".boton-volver2").forEach(boton => {
+  boton.addEventListener("click", e => {
+    e.preventDefault();
+
+    // Ocultar todas las secciones
+    document.querySelectorAll(".seccionOculta").forEach(sec => {
+      sec.style.display = "none";
+    });
+
+    // Volver a mostrar el menú principal
+    document.getElementById("versionPC").style.display = "block";
+    document.getElementById("fondoPC").style.display = "block";
+  });
 });
